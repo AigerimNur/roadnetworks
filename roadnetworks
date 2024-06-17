@@ -1,0 +1,12 @@
+import osmnx as ox
+admin = ox.geocode_to_gdf('Almaty')
+admin_poly = admin.geometry.values[0]
+admin_poly
+G = ox.graph_from_polygon(admin_poly)
+G.number_of_nodes(), G.number_of_edges()
+nodes, edges = ox.graph_to_gdfs(G)
+import matplotlib.pyplot as plt
+plt.style.use('dark_background')
+f, ax = plt.subplots(1,1,figsize = (20, 20), dpi=300)
+edges.plot(ax=ax, edgecolor = 'orange', linewidth = 0.3)
+ax.axis('off')
